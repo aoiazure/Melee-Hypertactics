@@ -1,0 +1,44 @@
+{
+    "GameActors": {
+        "Player": {
+            "Controller": "PlayerActorController",
+            "Initiative": 0,
+            "GridPosition": {
+                "X": 2,
+                "Y": 0
+            },
+            "Faction": "Player",
+            "GameActorDetails": {
+                "Name": "Player",
+                "PortraitPath": "res://Assets/Portraits/Swordman/Crops/Swordman B.png",
+                "SpritePath": "res://Assets/Sprites/BasicBlue.png",
+                "SpriteOffsetX": 0,
+                "SpriteOffsetY": -6
+            },
+            "GameActorStats": {
+                "CurrentHealth": 10,
+                "MaximumHealth": 10
+            }
+        },
+        "Enemy": {
+            "Controller": "FighterActorController",
+            "Initiative": 5,
+            "GridPosition": {
+                "X": 2,
+                "Y": 5
+            },
+            "Faction": "Enemy",
+            "GameActorDetails": {
+                "Name": "Enemy",
+                "PortraitPath": "res://Assets/Portraits/Swordman/Crops/Swordman B.png",
+                "SpritePath": "res://Assets/Sprites/BasicRed.png",
+                "SpriteOffsetX": 0,
+                "SpriteOffsetY": -6
+            },
+            "GameActorStats": {
+                "CurrentHealth": 7,
+                "MaximumHealth": 7
+            }
+        }
+    }
+}

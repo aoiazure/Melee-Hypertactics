@@ -1,0 +1,67 @@
+[gd_scene load_steps=10 format=4 uid="uid://c85dichoh4i2y"]
+
+[ext_resource type="Script" path="res://Testing/Testbed.cs" id="1_re70h"]
+[ext_resource type="PackedScene" uid="uid://3iq8y4wh25dq" path="res://Assets/Tileset/IsometricTilemap.tscn" id="2_64e7w"]
+[ext_resource type="Script" path="res://Game/Utils/IsometricGrid.cs" id="2_q2uj1"]
+[ext_resource type="Shader" path="res://Assets/Shaders/Background.gdshader" id="3_kqptt"]
+[ext_resource type="PackedScene" uid="uid://lwmo2vincfnh" path="res://Game/Combat/View/PlayerInterfaceView.tscn" id="4_8rbil"]
+[ext_resource type="Texture2D" uid="uid://btcl4g2ggtv6f" path="res://Assets/Sprites/background.png" id="4_dayaq"]
+
+[sub_resource type="Resource" id="Resource_o7fqh"]
+script = ExtResource("2_q2uj1")
+Offset = Vector2i(16, 8)
+Size = Vector2i(6, 6)
+CellSize = Vector2i(32, 16)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6oeyk"]
+shader = ExtResource("3_kqptt")
+shader_parameter/scroll_direction = Vector2(-1, -1)
+shader_parameter/scroll_speed = 0.025
+shader_parameter/zoom_amount = 0.1
+shader_parameter/scroll_texture = ExtResource("4_dayaq")
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_nr12c"]
+
+[node name="Testbed" type="Node2D" node_paths=PackedStringArray("EnvironmentMap", "MovementMap", "interfaceView")]
+script = ExtResource("1_re70h")
+Grid = SubResource("Resource_o7fqh")
+EnvironmentMap = NodePath("Environment")
+MovementMap = NodePath("MovementHighlight")
+interfaceView = NodePath("CanvasLayer/PlayerInterfaceView")
+metadata/_edit_lock_ = true
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Sprite2D" type="TextureRect" parent="CanvasLayer2"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("ShaderMaterial_6oeyk")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("PlaceholderTexture2D_nr12c")
+
+[node name="Background" parent="." instance=ExtResource("2_64e7w")]
+
+[node name="Environment" parent="." instance=ExtResource("2_64e7w")]
+tile_map_data = PackedByteArray("AAAAAAAAAAADAAAAAAAAAAEAAAADAAAAAAAAAAIAAAADAAAAAAAAAAMAAAADAAAAAAAAAAQAAAADAAAAAAAAAAUAAAADAAAAAAABAAUAAAADAAAAAAAEAAUAAAADAAAAAAAFAAUAAAADAAAAAAADAAUAAAADAAAAAAACAAUAAAADAAAAAAAFAAAAAAADAAAAAAAEAAAAAAADAAAAAAADAAAAAAADAAAAAAACAAAAAAADAAAAAAABAAAAAAADAAAAAAAFAAQAAAADAAAAAAAFAAMAAAADAAAAAAAFAAIAAAADAAAAAAAFAAEAAAADAAAAAAAEAAEAAAADAAAAAAADAAEAAAADAAAAAAACAAEAAAADAAAAAAABAAEAAAADAAAAAAABAAIAAAADAAAAAAABAAMAAAADAAAAAAABAAQAAAADAAAAAAACAAQAAAADAAAAAAADAAQAAAADAAAAAAADAAMAAAADAAAAAAAEAAMAAAADAAAAAAADAAIAAAADAAAAAAACAAIAAAADAAAAAAACAAMAAAADAAAAAAAEAAQAAAADAAAAAAAEAAIAAAADAAAAAAA=")
+
+[node name="MovementHighlight" parent="." instance=ExtResource("2_64e7w")]
+
+[node name="AttackHighlight" parent="." instance=ExtResource("2_64e7w")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(15, 71)
+zoom = Vector2(2, 2)
+
+[node name="AudioListener2D" type="AudioListener2D" parent="Camera2D"]
+current = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PlayerInterfaceView" parent="CanvasLayer" node_paths=PackedStringArray("MoveHighlight", "AttackHighlight") instance=ExtResource("4_8rbil")]
+MoveHighlight = NodePath("../../MovementHighlight")
+AttackHighlight = NodePath("../../AttackHighlight")

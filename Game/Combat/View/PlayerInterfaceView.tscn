@@ -1,0 +1,418 @@
+[gd_scene load_steps=20 format=3 uid="uid://lwmo2vincfnh"]
+
+[ext_resource type="Script" path="res://Game/Combat/View/PlayerInterfaceView.cs" id="1_467p0"]
+[ext_resource type="Texture2D" uid="uid://bv22k1lfde6rv" path="res://Assets/Masks/PortraitMask.png" id="2_ll0gq"]
+[ext_resource type="Texture2D" uid="uid://dv8pcdwf64hqk" path="res://Assets/Portraits/Swordman/Crops/Swordman B.png" id="4_ghebd"]
+[ext_resource type="Script" path="res://Game/Nodes/ActionButton.cs" id="4_hhj2f"]
+[ext_resource type="Texture2D" uid="uid://s5vrjoqb5uae" path="res://Assets/Sprites/Icons/play-button.svg" id="4_m03x0"]
+[ext_resource type="Texture2D" uid="uid://bp6s7c6np0wrh" path="res://Assets/Sprites/Icons/fast-backward-button.svg" id="4_t7og7"]
+[ext_resource type="FontFile" uid="uid://diefnb2nvekg2" path="res://Assets/Fonts/Robtronika-Italic.ttf" id="7_rup7y"]
+[ext_resource type="FontFile" uid="uid://uho3vt3i70ul" path="res://Assets/Fonts/Robtronika-Regular.ttf" id="8_m3hyv"]
+
+[sub_resource type="Animation" id="Animation_sq4r5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerPortrait:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-720, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("EnemyPortrait:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1600, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_gjgdd"]
+resource_name = "enemy_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemyPortrait:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1600, 0), Vector2(880, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ottwv"]
+resource_name = "enemy_out"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemyPortrait:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(880, 0), Vector2(1600, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_q2xe4"]
+resource_name = "player_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerPortrait:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-720, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_kg8oj"]
+resource_name = "player_out"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerPortrait:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-720, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7uv5l"]
+_data = {
+"RESET": SubResource("Animation_sq4r5"),
+"enemy_in": SubResource("Animation_gjgdd"),
+"enemy_out": SubResource("Animation_ottwv"),
+"player_in": SubResource("Animation_q2xe4"),
+"player_out": SubResource("Animation_kg8oj")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rqy27"]
+bg_color = Color(0.13769, 0.166175, 0.194213, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.388514, 0.420956, 0.45845, 1)
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tgc6l"]
+bg_color = Color(0.598309, 0.598309, 0.598309, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="LabelSettings" id="LabelSettings_ivvmh"]
+font_size = 36
+
+[sub_resource type="LabelSettings" id="LabelSettings_ix4sb"]
+line_spacing = -12.0
+font = ExtResource("7_rup7y")
+font_size = 36
+font_color = Color(0.858293, 0.88, 0.2288, 1)
+shadow_size = 8
+shadow_offset = Vector2(8, 8)
+
+[sub_resource type="LabelSettings" id="LabelSettings_0kkdu"]
+font = ExtResource("8_m3hyv")
+font_size = 64
+
+[node name="PlayerInterfaceView" type="Control" node_paths=PackedStringArray("PlayerAP", "EnemyAP", "PlayerPortrait", "EnemyPortrait", "DescriptionLabel", "ActionMenuContainer", "TabContainer", "MainMenuContainer", "AttackMenuContainer", "ResultsMenuContainer", "TurnTimer", "TimerContainer", "TimerLabel", "MoveButton", "AttackButton", "BlockButton", "EndTurnButton", "ThrustButton", "SlashButton", "SweepButton", "RewatchButton", "PlayAgainButton", "QuitButton")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1600.0
+offset_bottom = 900.0
+mouse_filter = 2
+script = ExtResource("1_467p0")
+PlayerAP = NodePath("PlayerInterfaceView/PlayerAnimationPlayer")
+EnemyAP = NodePath("PlayerInterfaceView/EnemyAnimationPlayer")
+PlayerPortrait = NodePath("PlayerInterfaceView/PlayerPortrait/Portrait")
+EnemyPortrait = NodePath("PlayerInterfaceView/EnemyPortrait/Portrait")
+DescriptionLabel = NodePath("PlayerInterfaceView/ActionMenuContainer/PanelContainer/MarginContainer/HSplitContainer/DescriptionLabel")
+ActionMenuContainer = NodePath("PlayerInterfaceView/ActionMenuContainer")
+TabContainer = NodePath("PlayerInterfaceView/ActionMenuContainer/PanelContainer/MarginContainer/HSplitContainer/TabContainer")
+MainMenuContainer = NodePath("PlayerInterfaceView/ActionMenuContainer/PanelContainer/MarginContainer/HSplitContainer/TabContainer/MainMenu")
+AttackMenuContainer = NodePath("PlayerInterfaceView/ActionMenuContainer/PanelContainer/MarginContainer/HSplitContainer/TabContainer/AttackContainer")
+ResultsMenuContainer = NodePath("PlayerInterfaceView/ResultsContainer")
+TurnTimer = NodePath("Timer")
+TimerContainer = NodePath("TimerContainer")
+TimerLabel = NodePath("TimerContainer/MarginContainer/VBoxContainer/Time")
+MoveButton = NodePath("PlayerInterfaceView/ActionMenuContainer/PanelContainer/MarginContainer/HSplitContainer/TabContainer/MainMenu/MoveButton")
+AttackButton = NodePath("PlayerInterfaceView/ActionMenuContainer/PanelContainer/MarginContainer/HSplitContainer/TabContainer/MainMenu/AttackButton")
+BlockButton = NodePath("PlayerInterfaceView/ActionMenuContainer/PanelContainer/MarginContainer/HSplitContainer/TabContainer/MainMenu/BlockButton")
+EndTurnButton = NodePath("PlayerInterfaceView/ActionMenuContainer/PanelContainer/MarginContainer/HSplitContainer/TabContainer/MainMenu/EndTurnButton")
+ThrustButton = NodePath("PlayerInterfaceView/ActionMenuContainer/PanelContainer/MarginContainer/HSplitContainer/TabContainer/AttackContainer/ThrustButton")
+SlashButton = NodePath("PlayerInterfaceView/ActionMenuContainer/PanelContainer/MarginContainer/HSplitContainer/TabContainer/AttackContainer/SlashButton")
+SweepButton = NodePath("PlayerInterfaceView/ActionMenuContainer/PanelContainer/MarginContainer/HSplitContainer/TabContainer/AttackContainer/SweepButton")
+RewatchButton = NodePath("PlayerInterfaceView/ResultsContainer/PanelContainer/MarginContainer/VBoxContainer/RewatchButton")
+PlayAgainButton = NodePath("PlayerInterfaceView/ResultsContainer/PanelContainer/MarginContainer/VBoxContainer/ReplayButton")
+QuitButton = NodePath("PlayerInterfaceView/ResultsContainer/PanelContainer/MarginContainer/VBoxContainer/QuitButton")
+
+[node name="PlayerInterfaceView" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayerAnimationPlayer" type="AnimationPlayer" parent="PlayerInterfaceView"]
+libraries = {
+"": SubResource("AnimationLibrary_7uv5l")
+}
+speed_scale = 1.5
+
+[node name="EnemyAnimationPlayer" type="AnimationPlayer" parent="PlayerInterfaceView"]
+libraries = {
+"": SubResource("AnimationLibrary_7uv5l")
+}
+speed_scale = 1.5
+
+[node name="PlayerPortrait" type="Sprite2D" parent="PlayerInterfaceView"]
+clip_children = 2
+position = Vector2(-720, 0)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("2_ll0gq")
+centered = false
+metadata/_edit_group_ = true
+
+[node name="Portrait" type="Sprite2D" parent="PlayerInterfaceView/PlayerPortrait"]
+texture = ExtResource("4_ghebd")
+centered = false
+flip_h = true
+
+[node name="EnemyPortrait" type="Sprite2D" parent="PlayerInterfaceView"]
+clip_children = 2
+position = Vector2(1600, 0)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("2_ll0gq")
+centered = false
+flip_h = true
+metadata/_edit_group_ = true
+
+[node name="Portrait" type="Sprite2D" parent="PlayerInterfaceView/EnemyPortrait"]
+texture = ExtResource("4_ghebd")
+centered = false
+
+[node name="ActionMenuContainer" type="CenterContainer" parent="PlayerInterfaceView"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="PanelContainer" type="PanelContainer" parent="PlayerInterfaceView/ActionMenuContainer"]
+custom_minimum_size = Vector2(600, 250)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rqy27")
+
+[node name="MarginContainer" type="MarginContainer" parent="PlayerInterfaceView/ActionMenuContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="HSplitContainer" type="HSplitContainer" parent="PlayerInterfaceView/ActionMenuContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="TabContainer" type="TabContainer" parent="PlayerInterfaceView/ActionMenuContainer/PanelContainer/MarginContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_tgc6l")
+current_tab = 0
+tabs_visible = false
+
+[node name="MainMenu" type="VBoxContainer" parent="PlayerInterfaceView/ActionMenuContainer/PanelContainer/MarginContainer/HSplitContainer/TabContainer"]
+layout_mode = 2
+alignment = 1
+metadata/_tab_index = 0
+
+[node name="InfoLabel" type="Label" parent="PlayerInterfaceView/ActionMenuContainer/PanelContainer/MarginContainer/HSplitContainer/TabContainer/MainMenu"]
+layout_mode = 2
+
+[node name="MoveButton" type="Button" parent="PlayerInterfaceView/ActionMenuContainer/PanelContainer/MarginContainer/HSplitContainer/TabContainer/MainMenu"]
+visible = false
+layout_mode = 2
+text = "Move"
+
+[node name="AttackButton" type="Button" parent="PlayerInterfaceView/ActionMenuContainer/PanelContainer/MarginContainer/HSplitContainer/TabContainer/MainMenu" node_paths=PackedStringArray("DescriptionLabel")]
+layout_mode = 2
+text = "Attack"
+script = ExtResource("4_hhj2f")
+DescriptionLabel = NodePath("../../../DescriptionLabel")
+Description = "Commit to an attack."
+
+[node name="BlockButton" type="Button" parent="PlayerInterfaceView/ActionMenuContainer/PanelContainer/MarginContainer/HSplitContainer/TabContainer/MainMenu" node_paths=PackedStringArray("DescriptionLabel")]
+layout_mode = 2
+text = "Block"
+script = ExtResource("4_hhj2f")
+DescriptionLabel = NodePath("../../../DescriptionLabel")
+Description = "Block, halving incoming damage.
+COUNTERED by Feint."
+
+[node name="EndTurnButton" type="Button" parent="PlayerInterfaceView/ActionMenuContainer/PanelContainer/MarginContainer/HSplitContainer/TabContainer/MainMenu" node_paths=PackedStringArray("DescriptionLabel")]
+layout_mode = 2
+size_flags_vertical = 10
+text = "End Turn"
+script = ExtResource("4_hhj2f")
+DescriptionLabel = NodePath("../../../DescriptionLabel")
+Description = "Do nothing."
+
+[node name="AttackContainer" type="VBoxContainer" parent="PlayerInterfaceView/ActionMenuContainer/PanelContainer/MarginContainer/HSplitContainer/TabContainer"]
+visible = false
+layout_mode = 2
+alignment = 1
+metadata/_tab_index = 1
+
+[node name="ThrustButton" type="Button" parent="PlayerInterfaceView/ActionMenuContainer/PanelContainer/MarginContainer/HSplitContainer/TabContainer/AttackContainer" node_paths=PackedStringArray("DescriptionLabel")]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Thrust"
+script = ExtResource("4_hhj2f")
+DescriptionLabel = NodePath("../../../DescriptionLabel")
+Description = "Attack TWO tiles in a line AWAY."
+
+[node name="SlashButton" type="Button" parent="PlayerInterfaceView/ActionMenuContainer/PanelContainer/MarginContainer/HSplitContainer/TabContainer/AttackContainer" node_paths=PackedStringArray("DescriptionLabel")]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Slash"
+script = ExtResource("4_hhj2f")
+DescriptionLabel = NodePath("../../../DescriptionLabel")
+Description = "Attack 3 tiles in a L shape."
+
+[node name="SweepButton" type="Button" parent="PlayerInterfaceView/ActionMenuContainer/PanelContainer/MarginContainer/HSplitContainer/TabContainer/AttackContainer" node_paths=PackedStringArray("DescriptionLabel")]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Sweep"
+script = ExtResource("4_hhj2f")
+DescriptionLabel = NodePath("../../../DescriptionLabel")
+Description = "Attack 3 tiles in a HORIZONTAL line."
+
+[node name="DescriptionLabel" type="Label" parent="PlayerInterfaceView/ActionMenuContainer/PanelContainer/MarginContainer/HSplitContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="ResultsContainer" type="CenterContainer" parent="PlayerInterfaceView"]
+visible = false
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="PlayerInterfaceView/ResultsContainer"]
+custom_minimum_size = Vector2(400, 450)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PlayerInterfaceView/ResultsContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInterfaceView/ResultsContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="BasicLabel" type="Label" parent="PlayerInterfaceView/ResultsContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Battle Over"
+label_settings = SubResource("LabelSettings_ivvmh")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RewatchButton" type="Button" parent="PlayerInterfaceView/ResultsContainer/PanelContainer/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 10
+text = "Rewatch Battle"
+icon = ExtResource("4_t7og7")
+expand_icon = true
+
+[node name="ReplayButton" type="Button" parent="PlayerInterfaceView/ResultsContainer/PanelContainer/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 6
+text = "Play Again
+"
+icon = ExtResource("4_m03x0")
+expand_icon = true
+
+[node name="QuitButton" type="Button" parent="PlayerInterfaceView/ResultsContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+text = "Quit Game"
+
+[node name="TimerContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = -230.0
+offset_right = 423.0
+offset_bottom = -25.0
+grow_vertical = 0
+pivot_offset = Vector2(50, 0)
+metadata/_edit_group_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="TimerContainer"]
+custom_minimum_size = Vector2(200, 150)
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TimerContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TimerContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+size_flags_stretch_ratio = 0.5
+text = "TIME REMAINING"
+label_settings = SubResource("LabelSettings_ix4sb")
+autowrap_mode = 3
+
+[node name="Time" type="Label" parent="TimerContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "20.00"
+label_settings = SubResource("LabelSettings_0kkdu")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 15.0
+one_shot = true

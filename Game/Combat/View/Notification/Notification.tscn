@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbtkk2xo3pmhl"]
+
+[ext_resource type="Script" path="res://Game/Combat/View/Notification/NotificationPanel.cs" id="1_hda0d"]
+[ext_resource type="FontFile" uid="uid://diefnb2nvekg2" path="res://Assets/Fonts/Robtronika-Italic.ttf" id="1_o3pnp"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6e868"]
+font = ExtResource("1_o3pnp")
+font_size = 36
+
+[node name="NotificationPanel" type="Control" node_paths=PackedStringArray("Label", "Container")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_hda0d")
+Label = NodePath("PanelContainer/MarginContainer/Label")
+Container = NodePath("PanelContainer")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(800, 150)
+layout_mode = 0
+offset_left = -800.0
+offset_bottom = 150.0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+text = "Notification!"
+label_settings = SubResource("LabelSettings_6e868")
+horizontal_alignment = 1
+vertical_alignment = 1

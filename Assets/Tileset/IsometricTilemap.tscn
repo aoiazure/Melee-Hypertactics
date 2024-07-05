@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://3iq8y4wh25dq"]
+
+[ext_resource type="Texture2D" uid="uid://sf6arlederht" path="res://Assets/Tileset/iso_tileset.png" id="1_pfkat"]
+[ext_resource type="Script" path="res://Game/Combat/View/HighlightTilemap.cs" id="2_wen7n"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d2kpq"]
+texture = ExtResource("1_pfkat")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+1:0/0 = 0
+1:0/0/texture_origin = Vector2i(0, -8)
+2:0/0 = 0
+2:0/0/texture_origin = Vector2i(0, -8)
+3:0/0 = 0
+3:0/0/texture_origin = Vector2i(0, -8)
+4:0/0 = 0
+4:0/0/texture_origin = Vector2i(0, -8)
+5:0/0 = 0
+5:0/0/texture_origin = Vector2i(0, -8)
+6:0/0 = 0
+6:0/0/texture_origin = Vector2i(0, -8)
+0:1/0 = 0
+0:1/0/texture_origin = Vector2i(0, -8)
+1:1/0 = 0
+1:1/0/texture_origin = Vector2i(0, -8)
+
+[sub_resource type="TileSet" id="TileSet_t8hq2"]
+tile_shape = 1
+tile_layout = 5
+tile_offset_axis = 1
+tile_size = Vector2i(32, 16)
+sources/0 = SubResource("TileSetAtlasSource_d2kpq")
+
+[node name="TileMapLayer" type="TileMapLayer"]
+tile_set = SubResource("TileSet_t8hq2")
+script = ExtResource("2_wen7n")
